@@ -83,6 +83,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
       <Fab
         color="secondary"
         variant="extended"
+        onClick={() =>setDrawerOpen(true)}
         className={classes.fab}
       >
         <NavigationIcon />
