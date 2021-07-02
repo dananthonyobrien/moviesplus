@@ -9,3 +9,4 @@ const MovieReview =  ({ review }) => {
   );
 };
 export default MovieReview
+//error corrected
