@@ -69,6 +69,7 @@ export default function MovieCard({ movie, action }) {
           </Avatar>
         ) : null
       }
+    
       title={
         <Typography variant="h5" component="p">
           {movie.title}{" "}

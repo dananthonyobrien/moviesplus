@@ -30,10 +30,28 @@ const HomePage = (props) => {
       movies={movies}
       action={(movie) =>{
       return <AddToFavoritesIcon movie={movie}/>
+      return <AddToDetestedIcon movie={movie}/>
     }
   }
     />    
   );
+
+ // Redundant, but necessary to avoid app crashing.
+ const detested = movies.filter(m => m.detested)
+ localStorage.setItem('detested', JSON.stringify(detested))
+ const addToDetested = (movieId) => true 
+
+ return (
+   <PageTemplate
+     title="Discover Movies"
+     movies={movies}
+     action={(movie) =>{
+     return <AddToDetestedIcon movie={movie}/>
+   }
+ }
+   />    
+ );
+
 };
 
 export default HomePage;
