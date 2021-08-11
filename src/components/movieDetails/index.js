@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from "../movieReviews"
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
   return (
     <>
       <Typography variant="h5" component="h3">
-        Overview
+        Summary
       </Typography>
 
       <Typography variant="h6" component="p">
@@ -68,6 +69,11 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           label={`${movie.vote_average} (${movie.vote_count}`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
+        <Chip 
+        icon={<AccountCircle />}
+        label={`${movie.tagline.toLocaleString()}`}
+         />
+
       </Paper>
       <Paper component="ul" className={classes.root}>
         <li>
@@ -79,6 +85,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           </li>
         ))}
       </Paper>
+      
 
       <Fab
         color="secondary"
