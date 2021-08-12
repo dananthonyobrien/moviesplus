@@ -1,6 +1,6 @@
 export const getMovies = async () => {
     const response = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en&include_adult=false&include_video=false&page=1`
     );
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -55,3 +55,24 @@ export const getMovies = async () => {
         return json.results;
       });
   };
+
+  /*export const getDetestedMovies = (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=vote_average.asc&include_adult=false&include_video=false&page=1&vote_count.gte=1000`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        // console.log(json.results);
+        return json.results;
+      });
+  }; */
+
+   export const getDetestedMovies = async () => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=vote_average.asc&include_adult=false&include_video=false&page=1&vote_count.gte=1000`
+    );
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  }; 

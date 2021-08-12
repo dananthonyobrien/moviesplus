@@ -1,18 +1,24 @@
+//import React from "react";
 import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
-import { getMovie } from "../api/tmdb-api";
-import Spinner from '../components/spinner';
-import RemoveFromDetested from "../components/cardIcons/removeFromDetested";
+import { getMovie } from "../api/tmdb-api"; //Work from here on copying and changing getMovies method in tmdb-api.js
+import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
-
+import { useQuery } from 'react-query'
+import Spinner from '../components/spinner'
+import {getMovies} from '../api/tmdb-api'
+import {getDetestedMovies} from '../api/tmdb-api'
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import AddToDetestedIcon from '../components/cardIcons/addToFavorites'
+//Solution 1 following Favourite page
 
 const DetestedMoviesPage = () => {
-  const {detested: movieIds } = useContext(MoviesContext);
+  const {favorites: movieIds } = useContext(MoviesContext);
 
   // Create an array of queries and run in parallel.
-  const detestedMovieQueries = useQueries(
+  const favoriteMovieQueries = useQueries(
     movieIds.map((movieId) => {
       return {
         queryKey: ["movie", { id: movieId }],
@@ -21,12 +27,12 @@ const DetestedMoviesPage = () => {
     })
   );
   // Check if any of the parallel queries is still loading.
-  const isLoading = detestedMovieQueries.find((m) => m.isLoading === true);
+  const isLoading = favoriteMovieQueries.find((m) => m.isLoading === true);
 
   if (isLoading) {
     return <Spinner />;
   }
-  const movies = detestedMovieQueries.map((q) => q.data);
+  const movies = favoriteMovieQueries.map((q) => q.data);
   const toDo = () => true;
 
   return (
@@ -36,7 +42,7 @@ const DetestedMoviesPage = () => {
       action={(movie) => {
         return (
           <>
-            <RemoveFromDetested movie={movie} />
+            <RemoveFromFavorites movie={movie} />
             <WriteReview movie={movie} />
           </>
         );
@@ -45,4 +51,43 @@ const DetestedMoviesPage = () => {
   );
 };
 
+export default DetestedMoviesPage; 
+
+//Soultion 2 following Homepage
+
+
+/*
+
+const DetestedMoviesPage = (props) => {
+  const {  data, error, isLoading, isError }  = useQuery('discover', getDetestedMovies)
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>
+  } 
+   
+  const detestedMovies = data.results;
+
+  // Redundant, but necessary to avoid app crashing.
+  const detested = detestedMovies.filter(m => m.detested)
+  localStorage.setItem('detested', JSON.stringify(detested))
+  const addToFavorites = (movieId) => true 
+
+  return (
+    <PageTemplate
+      title="Detested Movies"
+      detestedMovies={detestedMovies}
+      //action={(movie) =>{
+      //return <AddToFavoritesIcon movie={movie}
+      />  
+  );
+
+
+};
+
 export default DetestedMoviesPage;
+
+*/
