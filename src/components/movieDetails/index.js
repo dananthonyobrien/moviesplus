@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from "../movieReviews"
+import SimilarMovies from "../similarMovies"
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
@@ -94,12 +95,29 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         className={classes.fab}
       >
         <NavigationIcon />
+        Similar Movies
+      </Fab>
+      <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <SimilarMovies movie={movie} />
+      </Drawer>
+
+      <Fab
+        color="secondary"
+        variant="extended"
+        onClick={() =>setDrawerOpen(true)}
+        className={classes.fab}
+      >
+        <NavigationIcon />
         Reviews
       </Fab>
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>
+
+
       </>
+
+
   );
 };
 export default  MovieDetails ;
