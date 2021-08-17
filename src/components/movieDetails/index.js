@@ -38,6 +38,8 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
 
 
 
+    
+  
 
   return (
     <>
@@ -63,17 +65,19 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
           icon={<MonetizationIcon />}
-          label={`${movie.revenue.toLocaleString()}`}
+          label={`${movie.budget.toLocaleString()} / ${movie.revenue.toLocaleString()}`}
         />
         <Chip
           icon={<StarRate />}
-          label={`${movie.vote_average} (${movie.vote_count}`}
+          label={`${movie.vote_average} ${movie.vote_count}`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
         <Chip 
         icon={<AccountCircle />}
         label={`${movie.tagline.toLocaleString()}`}
          />
+        
+      
 
       </Paper>
       <Paper component="ul" className={classes.root}>
@@ -86,18 +90,22 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           </li>
         ))}
       </Paper>
+    
+      <Typography variant="h6" component="p">
+        {movie.overview}
+      </Typography>
       
 
-      <Fab
+      <Fab align ="center"
         color="secondary"
         variant="extended"
         onClick={() =>setDrawerOpen(true)}
         className={classes.fab}
       >
-        <NavigationIcon />
+        <NavigationIcon align="top"/>
         Similar Movies
       </Fab>
-      <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+      <Drawer anchor="bottom" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <SimilarMovies movie={movie} />
       </Drawer>
 

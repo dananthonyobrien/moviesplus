@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
 export default function SimilarMovies({ movie }) {
   const classes = useStyles();
-  const [similars, setSimilar] = useState([]);
+  const [similar, setSimilar] = useState([]);
 
   useEffect(() => {
     getSimilarMovies(movie.id).then((similar) => {
@@ -39,7 +39,7 @@ export default function SimilarMovies({ movie }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {similars.map((r) => (
+          {similar.map((r) => (
             <TableRow key={r.id}>
               <TableCell component="th" scope="row">
                 {r.title}
@@ -50,12 +50,12 @@ export default function SimilarMovies({ movie }) {
                   to={{
                     pathname: `/similar/${r.id}`,
                     state: {
-                      review: r,
+                      similar: r,
                       movie: movie,
                     },
                   }}
                 >
-                  Full Review
+                  Film Link
                 </Link>
               </TableCell>
             </TableRow>
