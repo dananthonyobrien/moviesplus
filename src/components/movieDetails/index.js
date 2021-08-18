@@ -12,6 +12,7 @@ import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from "../movieReviews"
 import SimilarMovies from "../similarMovies"
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,9 +91,12 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           </li>
         ))}
       </Paper>
+      <Button variant="contained" color="primary" href="#similar">
+  Link
+</Button>
     
       <Typography variant="h6" component="p">
-        {movie.overview}
+        {movie.logo_path}
       </Typography>
       
 
